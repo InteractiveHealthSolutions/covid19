@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<include file="classpath:db/changelog/liquibase-changelog-schema.xml" />
+	<include file="classpath:db/changelog/liquibase-changelog-metadata.xml" />
+	<include file="classpath:db/changelog/liquibase-changelog-coronavirus-metadata.xml" />
+	
+	<changeSet author="owais.hussain" id="FIX-1">
+		<sql endDelimiter=";">
+			UPDATE element SET datatype = UPPER(datatype);
+			UPDATE location_attribute_type SET datatype = UPPER(datatype);
+			UPDATE person_attribute_type SET datatype = UPPER(datatype);
+			UPDATE user_attribute_type SET datatype = UPPER(datatype);
+		</sql>
+	</changeSet>
+	
+</databaseChangeLog>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<property name="schemaName" value="coronavirus"
+		dbms="mysql,oracle,postgresql" />
+
+	<changeSet author="owais.hussain"
+		id="1567592262255-definition">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="definition"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="definition">
+			<column autoIncrement="true" name="definition_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="definition_type_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="definition" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="preferred" type="BIT(1)" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-definition_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="definition_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="definition_type">
+			<column autoIncrement="true" name="definition_type_id"
+				type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="type_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-donor">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="donor"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}" tableName="donor">
+			<column autoIncrement="true" name="donor_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="VARCHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_voided" type="datetime" />
+			<column name="voided" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reason_voided" type="VARCHAR(255)" />
+			<column name="donor_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="created_by" type="INT" />
+			<column name="updated_by" type="INT" />
+			<column name="voided_by" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-element">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="element"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="element">
+			<column autoIncrement="true" name="element_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="VARCHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="datatype" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="element_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="validation_regex" type="VARCHAR(1024)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-location">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="location"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="location">
+			<column autoIncrement="true" name="location_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="VARCHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_voided" type="datetime" />
+			<column name="voided" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reason_voided" type="VARCHAR(255)" />
+			<column name="address1" type="VARCHAR(255)" />
+			<column name="address2" type="VARCHAR(255)" />
+			<column name="address3" type="VARCHAR(255)" />
+			<column name="city_village" type="VARCHAR(255)" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="email" type="VARCHAR(255)" />
+			<column name="landmark1" type="VARCHAR(255)" />
+			<column name="landmark2" type="VARCHAR(255)" />
+			<column name="latitude" type="DOUBLE" />
+			<column name="location_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="longitude" type="DOUBLE" />
+			<column name="postal_code" type="INT" />
+			<column name="primary_contact" type="VARCHAR(255)" />
+			<column name="primary_contact_person" type="VARCHAR(255)" />
+			<column name="secondary_contact" type="VARCHAR(255)" />
+			<column name="secondary_contact_person" type="VARCHAR(255)" />
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="state_province" type="VARCHAR(255)" />
+			<column name="tertiary_contact" type="VARCHAR(255)" />
+			<column name="tertiary_contact_person" type="VARCHAR(255)" />
+			<column name="created_by" type="INT" />
+			<column name="updated_by" type="INT" />
+			<column name="voided_by" type="INT" />
+			<column name="category" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="country" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="parent_location" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-location_attribute_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="location_attribute_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="location_attribute_type">
+			<column autoIncrement="true" name="attribute_type_id"
+				type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="attribute_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="datatype" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="validation_regex" type="VARCHAR(1024)" />
+			<column name="required" type="BIT(1)" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-person_attribute_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="person_attribute_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="person_attribute_type">
+			<column autoIncrement="true" name="attribute_type_id"
+				type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="attribute_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="datatype" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="validation_regex" type="VARCHAR(1024)" />
+			<column name="required" type="BIT(1)" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-privilege">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="privileges"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="privileges">
+			<column name="privilege_name" type="VARCHAR(45)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-role">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="role" schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}" tableName="role">
+			<column autoIncrement="true" name="role_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="role_name" type="VARCHAR(45)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-role_privilege">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="role_privilege"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="role_privilege">
+			<column name="role_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="privilege_name" type="VARCHAR(45)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-user_attribute_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="user_attribute_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="user_attribute_type">
+			<column autoIncrement="true" name="attribute_type_id"
+				type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="VARCHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="attribute_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="datatype" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="required" type="BIT(1)" />
+			<column name="validation_regex" type="VARCHAR(1024)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-user_role">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="user_role"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="user_role">
+			<column name="user_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="role_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-users">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="users"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}" tableName="users">
+			<column autoIncrement="true" name="user_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="username" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="full_name" type="VARCHAR(255)" />
+			<column name="password_hash" type="VARCHAR(255)" />
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="voided" type="BIT(1)" />
+			<column name="created_by" type="INT" />
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_by" type="INT" />
+			<column name="date_updated" type="datetime" />
+			<column name="voided_by" type="INT" />
+			<column name="date_voided" type="datetime" />
+			<column name="reason_voided" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="1567592262255-rev_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="revision_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="revision_type">
+			<column autoIncrement="true" name="revision_type_id"
+				type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="revision_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain"
+		id="1567592262255-form_type">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="form_type"
+					schemaName="${schemaName}" />
+			</not>
+		</preConditions>
+		<createTable catalogName="${schemaName}"
+			tableName="form_type">
+			<column autoIncrement="true" name="form_type_id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="uuid" type="VARCHAR(38)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_updated" type="datetime" />
+			<column name="date_retired" type="datetime" />
+			<column name="description" type="VARCHAR(255)" />
+			<column name="retired" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reason_retired" type="VARCHAR(255)" />
+			<column name="form_name" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="form_schema" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="INT" />
+			<column name="form_group" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="owais.hussain" id="20190911-1" failOnError="false">
+		<addPrimaryKey catalogName="${schemaName}"
+			tableName="user_role" columnNames="user_id, role_id"
+			constraintName="pk_user_role" />
+	</changeSet>
+	<changeSet author="owais.hussain" id="20190911-2" failOnError="false">
+		<addPrimaryKey catalogName="${schemaName}"
+			tableName="role_privilege" columnNames="role_id, privilege_name"
+			constraintName="pk_role_privilege" />
+	</changeSet>
+	<changeSet author="owais.hussain" id="20200310-1" failOnError="false">
+    <addForeignKeyConstraint baseTableName="form_type" baseColumnNames="form_group"
+            referencedColumnNames="definition_id" referencedTableName="definition"
+            constraintName="fk_form_type_definition" 
+            onDelete="CASCADE" onUpdate="RESTRICT" />
+	</changeSet>
+	<changeSet author="owais.hussain" id="20200310-2" failOnError="true">
+    <addForeignKeyConstraint baseTableName="role_privilege" baseColumnNames="privilege_name"
+            referencedColumnNames="privilege_name" referencedTableName="privileges"
+            constraintName="fk_privilege_name_privileges" 
+            onDelete="CASCADE" onUpdate="RESTRICT" />
+	</changeSet>
+</databaseChangeLog>

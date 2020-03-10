@@ -1,0 +1,169 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<property name="schemaName" value="coronavirus"
+		dbms="mysql,oracle,postgresql" />
+
+	<!-- The reason for not writing SQL here is to guarantee compatibility with any DB -->
+	<changeSet author="owais.hussain" id="COMPULSORY-USER"
+		failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from users</sqlCheck>
+		</preConditions>
+		<insert tableName="users">
+			<column name="user_id" valueNumeric="1" />
+			<column name="username" value="admin" />
+			<column name="full_name" value="Administrator" />
+			<column name="password_hash"
+				value="$2a$13$9eWmJHwQrbEM/aN.bzCur.FzJthJKhVGKQ2obEBCJbcMtW8N.EC/W" />
+			<column name="uuid"
+				value="254d77c9-ae23-11e9-940b-f430b9535733" />
+			<column name="voided" valueBoolean="false" />
+			<column name="created_by" />
+			<column name="date_created" valueDate="2019-07-24T19:56:15" />
+			<column name="updated_by" />
+			<column name="date_updated" />
+			<column name="voided_by" />
+			<column name="date_voided" />
+			<column name="reason_voided" />
+		</insert>
+	</changeSet>
+	<changeSet author="owais.hussain" id="COMPULSORY-REVISIONS"
+		failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from revision_type</sqlCheck>
+		</preConditions>
+		<insert tableName="revision_type">
+			<column name="revision_type_id" valueNumeric="0" />
+			<column name="revision_name" value="ADD" />
+		</insert>
+		<insert tableName="revision_type">
+			<column name="revision_type_id" valueNumeric="1" />
+			<column name="revision_name" value="UPDATE" />
+		</insert>
+		<insert tableName="revision_type">
+			<column name="revision_type_id" valueNumeric="2" />
+			<column name="revision_name" value="DELETE" />
+		</insert>
+	</changeSet>
+
+	<changeSet author="owais.hussain" id="PRIVILEGES" onValidationFail="MARK_RAN" failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from privileges</sqlCheck>
+		</preConditions>
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Definition','40789c36-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Donor','407aee24-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Element','407d08f8-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add FormData','407f39a6-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add FormType','40814b17-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Location','40835ac5-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Metadata','40857746-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add People','40879efc-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Project','4089cd01-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add Role','408be6a6-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Add User','408df635-d2dc-11e9-88e5-a44cc805a786');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Definition','fb8dd73f-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Donor','fb940243-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Element','fb972736-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete FormData','fb9a03ec-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete FormType','fb9d0eeb-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Location','fb9ffd12-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Metadata','fb90b3c8-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete People','fba2f7ce-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Project','fba62da6-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete Role','fba91af0-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Delete User','fbabeff0-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Definition','fb4e6daa-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Donor','fb54e295-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Element','fb5799ec-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit FormData','fb5a4c5f-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit FormType','fb5d0118-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Location','fb602165-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Metadata','fb51a778-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit People','fb635e0e-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Project','fb663cf4-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit Role','fb68de48-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Edit User','fb6b8dda-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Definition','fb2d0d81-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Donor','fb344de8-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Element','fb373a97-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View FormData','fb3a0335-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View FormType','fb3cd82b-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Location','fb3fb4c9-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Metadata','fb31329a-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View People','fb430fac-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Project','fb45f6cd-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View Role','fb48a476-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('View User','fb4b7808-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Donor','fbb4b151-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Element','fbb8066c-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void FormData','fbbac043-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void FormType','fbbd7452-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Location','fbc0429f-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Metadata','fbb19550-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void People','fbc2fcf4-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Project','fbc62a9f-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void Role','fbc91a36-cf09-11e9-8650-f430b9535733');
+			INSERT IGNORE INTO `privileges` (`privilege_name`,`uuid`) VALUES ('Void User','fbcbd5e2-cf09-11e9-8650-f430b9535733');
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="ROLES" onValidationFail="MARK_RAN" failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from role</sqlCheck>
+		</preConditions>
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `role` (`role_id`,`role_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (1,'Admin','Administrator Role for full access',0,'2019-08-06 19:56:16',NULL,NULL,NULL,'63a6d80e-b8f7-11e9-a2a3-2a2ae2dbcce4');
+            INSERT IGNORE INTO `role` (`role_id`,`role_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (2,'Implementer',NULL,0,'2019-09-18 10:20:23',NULL,NULL,NULL,'c1f9fb6d-a88a-42f1-a57e-11daf208f7bc');
+            INSERT IGNORE INTO `role` (`role_id`,`role_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (3,'Sync',NULL,0,'2019-09-18 10:20:23',NULL,NULL,NULL,'c0fafda9-e325-4759-a24c-469df2d17cac');
+            INSERT IGNORE INTO `role` (`role_id`,`role_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (4,'Auditor',NULL,0,'2019-09-18 10:38:49',NULL,NULL,NULL,'e763223b-bfe4-4688-94ca-2c5918e9d88b');
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="USERS-1">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `users` (`user_id`,`username`,`full_name`,`password_hash`,`uuid`,`voided`,`created_by`,`date_created`,`updated_by`,`date_updated`,`voided_by`,`date_voided`,`reason_voided`) VALUES (2,'implementer','Implementation Manager','$2a$05$cnb99/r8eEzUz1a6944tT.pvQL7hzShIL34PVPxGAKIoXLE78lpFu','f6df955a-9e07-4099-81ed-80a86304929e',0,1,'2019-09-18 08:33:15',NULL,NULL,NULL,NULL,NULL);
+			INSERT IGNORE INTO `users` (`user_id`,`username`,`full_name`,`password_hash`,`uuid`,`voided`,`created_by`,`date_created`,`updated_by`,`date_updated`,`voided_by`,`date_voided`,`reason_voided`) VALUES (3,'sync.user','Synchronizer','$2a$05$EGrhP6qDBBNeEsyhzBca9eTsw.sBsMOKxRxngnZMZcbH8a41Rtysi','f9e8c70c-e423-4933-acfa-532b351f5345',0,1,'2019-09-18 08:37:16',NULL,NULL,NULL,NULL,NULL);
+			INSERT IGNORE INTO `users` (`user_id`,`username`,`full_name`,`password_hash`,`uuid`,`voided`,`created_by`,`date_created`,`updated_by`,`date_updated`,`voided_by`,`date_voided`,`reason_voided`) VALUES (4,'auditor','Auditor','$2a$05$wmzKRJDEo0TXUDJRMZTKwekTJvT5D4xR4yVngb80FzwBXaVD6W6KG','d2c3ad08-c1db-4bf0-b596-f6a2553e4911',0,1,'2019-09-18 08:37:52',NULL,NULL,NULL,NULL,NULL);
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="USER-ROLES-1">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (1,1);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (1,2);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (1,3);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (1,4);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (2,2);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (3,3);
+			INSERT IGNORE INTO `user_role` (`user_id`,`role_id`) VALUES (4,4);
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="DEFINITION-TYPES" onValidationFail="MARK_RAN" failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from definition_type</sqlCheck>
+		</preConditions>
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (1,'Location Category','location_category','Location Category',0,'2019-09-09 06:58:06',NULL,NULL,NULL,'2cc8e109-d2cf-11e9-b422-0242ac130002');
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="LOCATIONS-1" onValidationFail="MARK_RAN" failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from location where short_name='UNKNOWN'</sqlCheck>
+		</preConditions>
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `location` (`location_id`,`uuid`,`date_created`,`date_updated`,`date_voided`,`voided`,`reason_voided`,`address1`,`address2`,`address3`,`city_village`,`description`,`email`,`landmark1`,`landmark2`,`latitude`,`location_name`,`longitude`,`postal_code`,`primary_contact`,`primary_contact_person`,`secondary_contact`,`secondary_contact_person`,`short_name`,`state_province`,`tertiary_contact`,`tertiary_contact_person`,`created_by`,`updated_by`,`voided_by`,`category`,`country`,`parent_location`) VALUES (1,'62d41628-d2e4-11e9-88e5-a44cc805a786','2019-09-09 14:29:45',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Unknown Location',NULL,NULL,NULL,NULL,NULL,NULL,'UNKNOWN',NULL,NULL,NULL,NULL,NULL,NULL,3,'Pakistan',NULL);
+		</sql>
+	</changeSet>
+	<changeSet author="owais.hussain" id="DEFINITIONS-1" onValidationFail="MARK_RAN" failOnError="false">
+		<preConditions>
+			<sqlCheck expectedResult="0">select count(*) from definition</sqlCheck>
+		</preConditions>
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (1,1,'School','school',NULL,'School',0,'2019-09-09 07:02:18',NULL,NULL,NULL,'cce57479-d09b-11e9-b422-0242ac130002');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (2,1,'Institution','institution',NULL,'Institution',0,'2019-09-09 07:02:18',NULL,NULL,NULL,'cce6ea85-d09b-11e9-b422-0242ac130002');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (3,1,'Parent Organization','parent_organization',NULL,'Parent Organization',0,'2019-09-09 07:02:18',NULL,NULL,NULL,'cce863e8-d09b-11e9-b422-0242ac130002');
+		</sql>
+	</changeSet>
+</databaseChangeLog>

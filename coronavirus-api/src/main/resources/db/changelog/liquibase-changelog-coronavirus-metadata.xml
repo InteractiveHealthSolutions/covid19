@@ -1,0 +1,15 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<property name="schemaName" value="aagahi"
+		dbms="mysql,oracle,postgresql" />
+
+	<changeSet author="owais.hussain" id="FORM_TYPES">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `form_type` (`form_type_id`,`uuid`,`date_created`,`date_retired`,`date_updated`,`description`,`retired`,`reason_retired`,`form_name`,`form_schema`,`short_name`,`version`,`form_group`) VALUES (1,'9d9dd303-d2d1-11e9-b422-0242ac130002','2019-09-09 07:15:34',NULL,NULL,'Training Detail Form',0,NULL,'Training Detail Form','{\"lang\":\"en\",\"fields\":[{\"page\":1,\"order\":1,\"element\":\"cbcc5642-c509-4d1b-a248-05170b188a19\"},{\"page\":1,\"order\":2,\"element\":\"39ac8ee9-b535-4052-b58a-f31927c66901\"},{\"page\":1,\"order\":3,\"element\":\"e1b07857-4a01-4b1e-9f71-e4e42f389205\"},{\"page\":1,\"order\":4,\"element\":\"5d8d2908-7042-4503-89d3-6e9fbaec017c\"},{\"page\":1,\"order\":5,\"element\":\"33e06ef5-0662-42f5-aedf-6aaefcd4c0a2\"},{\"page\":1,\"order\":6,\"element\":\"9f8f6ce5-35fa-4f4e-bbcb-3a29b1c67343\"},{\"page\":1,\"order\":7,\"element\":\"bb528f2a-f4f7-471a-bab7-0a108fee2460\"},{\"page\":1,\"order\":8,\"element\":\"47822c73-6e26-4f92-980a-850fc35f90cd\"},{\"page\":1,\"order\":9,\"element\":\"46741d9f-b606-4abc-bcb9-fbf98916f9e1\"},{\"page\":1,\"order\":10,\"element\":\"1f19ab28-5363-434f-bbc5-a9b5ffb40f04\"}]}','lse_training_detail',1,243);
+		</sql>
+	</changeSet>
+</databaseChangeLog>

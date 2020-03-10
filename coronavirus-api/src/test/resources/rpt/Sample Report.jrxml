@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Aagahi Report" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="059048a3-84dc-4020-b220-76e5ff37d12b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select t.short_name as form_type, l.short_name as location, f.* from _comms_social_media_details as f
+inner join form_type as t on t.form_type_id = f.form_type_id
+left outer join location as l on l.location_id = f.location_id;]]>
+	</queryString>
+	<field name="form_type" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="form_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reference_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="form_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_component" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_type_other" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="topic_covered" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="topic_covered_other" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_platform" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="post_platform_other" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="platform_scores" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="location">
+		<groupExpression><![CDATA[$F{location}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="20" uuid="6f568b97-1ec6-4614-803d-2364ff19ba6f"/>
+				<text><![CDATA[form_type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="0" width="39" height="20" uuid="c07f4342-147b-4fcc-af6d-fe115831a32d"/>
+				<text><![CDATA[location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="0" width="39" height="20" uuid="9441b623-1c49-4943-8965-beda00b83aaf"/>
+				<text><![CDATA[form_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="39" height="20" uuid="9825564a-f853-45f6-9b7a-f825bb23ba9d"/>
+				<text><![CDATA[reference_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="0" width="39" height="20" uuid="6985bb65-30db-46bb-a214-9578570203a6"/>
+				<text><![CDATA[form_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="0" width="39" height="20" uuid="df778d9e-5990-4d5c-b39a-f4af4da7b2cc"/>
+				<text><![CDATA[post_component]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="0" width="39" height="20" uuid="55f5d4fa-88d8-4add-b3cb-3c7cab76b86c"/>
+				<text><![CDATA[post_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="0" width="39" height="20" uuid="ffdb8bc3-a21e-468d-a06a-4f89f21e96a8"/>
+				<text><![CDATA[post_type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="39" height="20" uuid="8df2ab78-d563-433d-8412-e2961e48c1bd"/>
+				<text><![CDATA[post_type_other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="0" width="39" height="20" uuid="d4c8e211-a364-4439-ae40-2c3aa8b40c0f"/>
+				<text><![CDATA[topic_covered]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="39" height="20" uuid="5ae11e59-27c8-4b03-a258-925fff704b08"/>
+				<text><![CDATA[topic_covered_other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="0" width="39" height="20" uuid="43001036-3e7b-48bf-8990-64ea5bbead86"/>
+				<text><![CDATA[post_platform]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="0" width="39" height="20" uuid="41fe0688-39e8-4a77-9207-c5c3a2fcc91e"/>
+				<text><![CDATA[post_platform_other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="507" y="0" width="39" height="20" uuid="6665f5ba-1288-4365-a6f3-2c4c742277e8"/>
+				<text><![CDATA[platform_scores]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="39" height="20" uuid="434551e0-a7cb-46cb-b57f-c8824883f66f"/>
+				<textFieldExpression><![CDATA[$F{form_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="39" y="0" width="39" height="20" uuid="4f5083db-b702-4fc2-aa97-3c03551b1d45"/>
+				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="0" width="39" height="20" uuid="d1049547-5936-4ea3-9388-2c835c204acc"/>
+				<textFieldExpression><![CDATA[$F{form_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="39" height="20" uuid="fc71c960-1203-4202-9feb-5c1008aa5982"/>
+				<textFieldExpression><![CDATA[$F{reference_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="0" width="39" height="20" uuid="cb89dac7-181b-4a12-ac30-96d58b4fc57e"/>
+				<textFieldExpression><![CDATA[$F{form_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="39" height="20" uuid="b66f4159-1964-453c-aedf-0ec7e2b593a3"/>
+				<textFieldExpression><![CDATA[$F{post_component}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="0" width="39" height="20" uuid="1b0487e0-6bec-4a5d-aa45-208e0250263b"/>
+				<textFieldExpression><![CDATA[$F{post_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="39" height="20" uuid="51570cc4-6b66-4483-a74c-fcb0e4b53d7a"/>
+				<textFieldExpression><![CDATA[$F{post_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="39" height="20" uuid="c5b645a2-0c8e-49df-945a-9954fc85550b"/>
+				<textFieldExpression><![CDATA[$F{post_type_other}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="0" width="39" height="20" uuid="d7fe7b6d-bef3-468a-9b7d-a020753b0065"/>
+				<textFieldExpression><![CDATA[$F{topic_covered}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="39" height="20" uuid="6ce2dbd3-5bc4-4294-9c33-27f99be74fe7"/>
+				<textFieldExpression><![CDATA[$F{topic_covered_other}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="0" width="39" height="20" uuid="f2b6a915-18b4-48eb-b8d0-6e308ba91df1"/>
+				<textFieldExpression><![CDATA[$F{post_platform}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="39" height="20" uuid="f44e7a02-c824-421e-ba94-fbc5976c7259"/>
+				<textFieldExpression><![CDATA[$F{post_platform_other}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="507" y="0" width="39" height="20" uuid="65efaee8-93bc-4397-a41d-50fa6bef7f44"/>
+				<textFieldExpression><![CDATA[$F{platform_scores}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
