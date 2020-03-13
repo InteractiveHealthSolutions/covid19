@@ -19,12 +19,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import com.ihsinformatics.coronavirus.util.DateTimeUtil;
 
 /**
  * @author owais.hussain@ihsinformatics.com
  */
+
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Context extends SpringBootServletInitializer {

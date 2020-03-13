@@ -102,7 +102,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 	http.csrf().disable();
-	http.authorizeRequests().anyRequest().authenticated();
+	http.authorizeRequests().anyRequest().permitAll();
 	http.httpBasic().realmName(AuthenticationEntryPoint.AAHUNG_CORONAVIRUS_AUTH_REALM)
 		.authenticationEntryPoint(authEntryPoint);
 	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

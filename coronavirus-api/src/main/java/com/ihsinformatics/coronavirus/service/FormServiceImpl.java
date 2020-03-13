@@ -257,8 +257,6 @@ public class FormServiceImpl extends BaseService implements FormService {
      */
     @Override
     @MeasureProcessingTime
-/*    @CheckPrivilege(privilege = "Add FormData")
-*/    
     public FormData saveFormData(FormData obj) throws HibernateException, ValidationException, IOException {
 	FormData found = formDataRepository.findByUuid(obj.getUuid());
 	if (found != null) {

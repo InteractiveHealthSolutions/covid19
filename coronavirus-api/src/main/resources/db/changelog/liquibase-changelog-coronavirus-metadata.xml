@@ -75,4 +75,11 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="humdiya.raza" id="DEFINITION-UPDATE-I">
+		<sql endDelimiter=";">
+				INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (18,10,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'6532af3a-651e-11ea-ae7b-40b034969541');
+				UPDATE `definition` SET `definition_type_id`=4 WHERE `definition_id`= 7
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>
