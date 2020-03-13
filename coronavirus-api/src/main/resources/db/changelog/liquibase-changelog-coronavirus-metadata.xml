@@ -4,12 +4,75 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<property name="schemaName" value="aagahi"
+	<property name="schemaName" value="coronavirus"
 		dbms="mysql,oracle,postgresql" />
 
-	<changeSet author="owais.hussain" id="FORM_TYPES">
+	<changeSet author="humdiya.raza" id="DEFINITION-TYPES-II" onValidationFail="HALT" failOnError="true">
 		<sql endDelimiter=";">
-			INSERT IGNORE INTO `form_type` (`form_type_id`,`uuid`,`date_created`,`date_retired`,`date_updated`,`description`,`retired`,`reason_retired`,`form_name`,`form_schema`,`short_name`,`version`,`form_group`) VALUES (1,'9d9dd303-d2d1-11e9-b422-0242ac130002','2019-09-09 07:15:34',NULL,NULL,'Training Detail Form',0,NULL,'Training Detail Form','{\"lang\":\"en\",\"fields\":[{\"page\":1,\"order\":1,\"element\":\"cbcc5642-c509-4d1b-a248-05170b188a19\"},{\"page\":1,\"order\":2,\"element\":\"39ac8ee9-b535-4052-b58a-f31927c66901\"},{\"page\":1,\"order\":3,\"element\":\"e1b07857-4a01-4b1e-9f71-e4e42f389205\"},{\"page\":1,\"order\":4,\"element\":\"5d8d2908-7042-4503-89d3-6e9fbaec017c\"},{\"page\":1,\"order\":5,\"element\":\"33e06ef5-0662-42f5-aedf-6aaefcd4c0a2\"},{\"page\":1,\"order\":6,\"element\":\"9f8f6ce5-35fa-4f4e-bbcb-3a29b1c67343\"},{\"page\":1,\"order\":7,\"element\":\"bb528f2a-f4f7-471a-bab7-0a108fee2460\"},{\"page\":1,\"order\":8,\"element\":\"47822c73-6e26-4f92-980a-850fc35f90cd\"},{\"page\":1,\"order\":9,\"element\":\"46741d9f-b606-4abc-bcb9-fbf98916f9e1\"},{\"page\":1,\"order\":10,\"element\":\"1f19ab28-5363-434f-bbc5-a9b5ffb40f04\"}]}','lse_training_detail',1,243);
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (2,'Recently Travelled','recent_travel','Have you travelled from Mainland China/Iran/South Korea/ Italy / other high burden country***of COVID-19 infection in the last 14 days?',0, now(), NULL,NULL,NULL,'2ccd9219-d2cf-11e9-b482-0242ac130002');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (3,'Contact with Travelled Person','contact_traveller','Have you had close contact with any person , who has returned from Mainland China/Iran/South Korea/ Italy / other high burden country *** of COVID-19 infection in the last 14 days?',0, now(), NULL,NULL,NULL,'2ccd9219-d2cf-11e9-b422-0242ac130002');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (4,'Contact with Confirmed Case','contact_patient','Have you had close contact with a probable or confirmed case of COVID-19 in the last 14 days?',0, now(), NULL,NULL,NULL,'52f781a0-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (5,'Contact with Household Member Patient','household_member_patient','Are you currently living with a probable or confirmed case of Corona since the last 14 days?',0, now(), NULL,NULL,NULL,'5bbe34ac-6458-11ea-ae7b-40b034969541');
 		</sql>
 	</changeSet>
+	<changeSet author="humdiya.raza" id="DEFINITIONS-II">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (2,2,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'6c9a0ef9-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (3,2,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'74ec32b1-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (4,3,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'7c0b4502-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (5,3,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'80972037-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (6,4,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'85f192f2-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (7,5,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'92132d9e-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (8,5,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'99129f74-6458-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (9,5,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'a5e9215e-6458-11ea-ae7b-40b034969541');
+		</sql>
+	</changeSet>
+	<changeSet author="humdiya.raza" id="ELEMENTS-II">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (1,'cd4b40de-6458-11ea-ae7b-40b034969541',now(),NULL,NULL,'Recently Travelled','1',NULL,'DEFINITION','Recently Travelled','recent_travel',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (2,'db8f00a7-6458-11ea-ae7b-40b034969541',now(),NULL,NULL,'Contact with Travelled Person','1',NULL,'DEFINITION','Contact with Travelled Person','contact_traveller',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (3,'e1cce0a4-6458-11ea-ae7b-40b034969541',now(),NULL,NULL,'Contact with Confirmed Case','1',NULL,'DEFINITION','Contact with Confirmed Case','contact_patient',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (4,'e8f523f6-6458-11ea-ae7b-40b034969541',now(),NULL,NULL,'Contact with Household Member Patient','1',NULL,'DEFINITION','Contact with Household Member Patient','household_member_patient',NULL);
+		</sql>
+	</changeSet>
+		
+	<changeSet author="humdiya.raza" id="DEFINITION-TYPES-III">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (6,'Fever Symptom','fever','Do you have a fever?',0, now(), NULL,NULL,NULL,'a51b54c3-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (7,'Cough Symptom','cough','Do you have a cough?',0, now(), NULL,NULL,NULL,'c5594695-64f6-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (8,'Cold Symptom','cold','Do you have a cold?',0, now(), NULL,NULL,NULL,'d07a6ef7-64f6-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (9,'Sore Throat Symptom','sore_throat','Do you have a sore throat?',0, now(), NULL,NULL,NULL,'d5169fb1-64f6-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition_type` (`definition_type_id`,`type_name`,`short_name`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (10,'Shortness of breath Symptom','sob','Do you have a shortness of breath?',0, now(), NULL,NULL,NULL,'da4b6d43-64f6-11ea-ae7b-40b034969541');
+		</sql>
+	</changeSet>
+	<changeSet author="humdiya.raza" id="DEFINITIONS-III">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (10,6,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'c8cde9ad-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (11,6,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'cfc5117e-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (12,7,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'daa23150-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (13,7,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'e4060d47-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (14,8,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'eb63b293-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (15,8,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'f342738b-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (16,9,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'f9abc786-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (17,9,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'ffafd051-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (18,10,'Yes','yes',NULL,'Yes',0,now(),NULL,NULL,NULL,'f9abc786-6474-11ea-ae7b-40b034969541');
+			INSERT IGNORE INTO `definition` (`definition_id`,`definition_type_id`,`definition`,`short_name`,`preferred`,`description`,`retired`,`date_created`,`date_updated`,`date_retired`,`reason_retired`,`uuid`) VALUES (19,10,'No','no',NULL,'No',0,now(),NULL,NULL,NULL,'ea2a48c2-64f6-11ea-ae7b-40b034969541');
+		</sql>
+	</changeSet>
+	<changeSet author="humdiya.raza" id="ELEMENTS-III">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (5,'0a3441d2-6475-11ea-ae7b-40b034969541',now(),NULL,NULL,'Fever Symptom','1',NULL,'DEFINITION','Fever Symptom','fever',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (6,'0fbff727-6475-11ea-ae7b-40b034969541',now(),NULL,NULL,'Cough Symptom','1',NULL,'DEFINITION','Cough Symptom','cough',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (7,'15408a69-6475-11ea-ae7b-40b034969541',now(),NULL,NULL,'Cold Symptom','1',NULL,'DEFINITION','Cold Symptom','cold',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (8,'1a5c76ff-6475-11ea-ae7b-40b034969541',now(),NULL,NULL,'Sore Throat Symptom','1',NULL,'DEFINITION','Sore Throat Symptom','sore_throat',NULL);
+			INSERT IGNORE INTO `element` (`element_id`,`uuid`,`date_created`,`date_updated`,`date_retired`,`description`,`retired`,`reason_retired`,`datatype`,`element_name`,`short_name`,`validation_regex`) VALUES (9,'02647d0b-64f7-11ea-ae7b-40b034969541',now(),NULL,NULL,'Shortness of breath Symptom','1',NULL,'DEFINITION','Shortness of Breath Symptom','sob',NULL);
+		</sql>
+	</changeSet>
+
+	<changeSet author="humdiya.raza" id="FORM_TYPES-I">
+		<sql endDelimiter=";">
+			INSERT IGNORE INTO `form_type` (`form_type_id`,`uuid`,`date_created`,`date_retired`,`date_updated`,`description`,`retired`,`reason_retired`,`form_name`,`form_schema`,`short_name`,`version`,`form_group`) VALUES (1,'9d9dd303-d2d1-11e9-b422-0242ac130002',now(),NULL,NULL,'COVID-19 Risk Assessment Tool',0,NULL,'COVID-19 Risk Assessment Tool','{\"lang\":\"en\",\"fields\":[{\"page\":1,\"order\":1,\"element\":\"cd4b40de-6458-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":2,\"element\":\"db8f00a7-6458-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":3,\"element\":\"e1cce0a4-6458-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":4,\"element\":\"e8f523f6-6458-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":5,\"element\":\"0a3441d2-6475-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":6,\"element\":\"0fbff727-6475-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":7,\"element\":\"15408a69-6475-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":8,\"element\":\"1a5c76ff-6475-11ea-ae7b-40b034969541\"},{\"page\":1,\"order\":9,\"element\":\"02647d0b-64f7-11ea-ae7b-40b034969541\"}]}','covid_risk_assessment_tool',1, null);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>
